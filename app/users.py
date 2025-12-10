@@ -2,6 +2,13 @@ import os
 import pandas as pd
 import bcrypt
 
+def is_valid_hash(psw, hash):
+    """Check if a password matches a bcrypt hash."""
+    hash_ = hash.encode('utf-8')
+    byte_psw = psw.encode('utf-8')
+    is_valid = bcrypt.checkpw(byte_psw, hash_)
+    return is_valid
+
 def hash_password(password: str) -> str:
     "Hash a password for storing."
     salt = bcrypt.gensalt()
